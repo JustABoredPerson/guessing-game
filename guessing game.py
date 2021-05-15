@@ -32,6 +32,9 @@ def inputtingwords(numwords):
         elif i == 9:
             words = input("9th word: ")
             list_of_words.append(words)
+        elif i == 10:
+            words = input("10th word: ")
+            list_of_words.append(words)
         i+=1
         continue
     return list_of_words
@@ -63,6 +66,7 @@ def easy():
         print("Well done! You guessed it first try!")
         
 def normal():
+
     global tries
     list_of_words = inputtingwords(5)
 
@@ -87,6 +91,30 @@ def normal():
     else:
         print("Well done! You guessed it first try!")
 
+def hard():
+    global tries
+    list_of_words = inputtingwords(10)
+
+    print("Your list of words are: --->",list_of_words[0],",",list_of_words[1],",",list_of_words[2],",",list_of_words[3],",",list_of_words[4],",",list_of_words[5],",",list_of_words[6],",",list_of_words[7],",",list_of_words[8],",",list_of_words[9],"<---\n""\nThe computer has picked a word, guess which word the computer picked: ")
+    pickedword = random.choice(list_of_words)
+
+    guess = input("Your guess: ")
+
+    if guess != pickedword:
+        tries += 1
+        retry = ''
+
+        while retry != pickedword:
+
+            retry = input("Wrong! Try again: ")
+            
+            if retry != pickedword:
+                tries += 1
+                continue
+        
+            print("Well done! You guessed it in", tries, "tries!")
+    else:
+        print("Well done! You guessed it first try!")
 
 print("Welcome to the guessing game where you have to guess a word the computer picked from your choice of words!")
 difficulty = str(input("Would you like to play in 'easy', 'normal' or 'hard' mode?\nIf you want more information, input 'help': "))
@@ -97,5 +125,6 @@ elif difficulty == 'easy':
     easy()
 elif difficulty == 'normal':
     normal()
-
+elif difficulty == 'hard':
+    hard()
 
