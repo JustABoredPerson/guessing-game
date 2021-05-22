@@ -1,6 +1,13 @@
 import random
 
 tries = 0
+y = 0
+
+def strike(text):
+    result = ''
+    for c in text:
+        result = result + c + '\u0336'
+    return result
 
 def inputtingwords(numwords):
     i = 2
@@ -41,6 +48,7 @@ def inputtingwords(numwords):
 
 def easy():
 
+    global y
     global tries
     list_of_words = inputtingwords(3)
 
@@ -51,22 +59,36 @@ def easy():
 
     if guess != pickedword:
         tries += 1
-        retry = ''
+        retry = guess
 
         while retry != pickedword:
+
+            while True:
+                if list_of_words[y] == retry:
+                    list_of_words[y] = strike(list_of_words[y])
+                    print("\nYour list of words are: --->",list_of_words[0],",",list_of_words[1],",",list_of_words[2],"<---\n")
+                    y = 0
+                    break
+                else:
+                    y+=1
+                if y >= len(list_of_words):
+                    break
+                    
 
             retry = input("Wrong! Try again: ")
             
             if retry != pickedword:
+                y = 0
                 tries += 1
                 continue
         
-            print("Well done! You guessed it in", tries, "tries!")
+            print("Well done! You guessed it in", tries, "tries! The word was " + pickedword)
     else:
-        print("Well done! You guessed it first try!")
+        print("Well done! You guessed it first try! The word was " + pickedword)
         
 def normal():
 
+    global y
     global tries
     list_of_words = inputtingwords(5)
 
@@ -77,44 +99,76 @@ def normal():
 
     if guess != pickedword:
         tries += 1
-        retry = ''
+        retry = guess
 
         while retry != pickedword:
+
+            while True:
+                if list_of_words[y] == retry:
+                    list_of_words[y] = strike(list_of_words[y])
+                    print("\nYour list of words are: --->",list_of_words[0],",",list_of_words[1],",",list_of_words[2],",",list_of_words[3],",",list_of_words[4],"<---\n")
+                    y = 0
+                    break
+                else:
+                    y+=1
+                if y >= len(list_of_words):
+                    break
+                    
 
             retry = input("Wrong! Try again: ")
             
             if retry != pickedword:
+                y = 0
                 tries += 1
                 continue
         
-            print("Well done! You guessed it in", tries, "tries!")
+            print("Well done! You guessed it in", tries, "tries! The word was " + pickedword)
     else:
-        print("Well done! You guessed it first try!")
+        print("Well done! You guessed it first try! The word was " + pickedword)
 
 def hard():
+
+    global y
     global tries
     list_of_words = inputtingwords(10)
 
-    print("Your list of words are: --->",list_of_words[0],",",list_of_words[1],",",list_of_words[2],",",list_of_words[3],",",list_of_words[4],",",list_of_words[5],",",list_of_words[6],",",list_of_words[7],",",list_of_words[8],",",list_of_words[9],"<---\n""\nThe computer has picked a word, guess which word the computer picked: ")
+    print("\nYour list of words are: --->",list_of_words[0],",",list_of_words[1],",",list_of_words[2],",",list_of_words[3],",",list_of_words[4],",",list_of_words[5],",",list_of_words[6],",",list_of_words[7],",",list_of_words[8],",",list_of_words[9],"<---\n""The computer has picked a word, guess which word the computer picked: ")
     pickedword = random.choice(list_of_words)
 
     guess = input("Your guess: ")
 
     if guess != pickedword:
         tries += 1
-        retry = ''
+        retry = guess
 
         while retry != pickedword:
+
+            while True:
+                if list_of_words[y] == retry:
+                    list_of_words[y] = strike(list_of_words[y])
+                    print("\nYour list of words are: --->",list_of_words[0],",",list_of_words[1],",",list_of_words[2],",",list_of_words[3],",",list_of_words[4],",",list_of_words[5],",",list_of_words[6],",",list_of_words[7],",",list_of_words[8],",",list_of_words[9],"<---")
+                    y = 0
+                    break
+                else:
+                    y+=1
+                if y >= len(list_of_words):
+                    break
+                    
 
             retry = input("Wrong! Try again: ")
             
             if retry != pickedword:
+                y = 0
                 tries += 1
                 continue
         
-            print("Well done! You guessed it in", tries, "tries!")
+            print("Well done! You guessed it in", tries, "tries! The word was " + pickedword)
     else:
-        print("Well done! You guessed it first try!")
+        print("Well done! You guessed it first try! The word was " + pickedword)
+
+print("................................")
+print("\tGuessing Game")
+print("................................")
 
 print("Welcome to the guessing game where you have to guess a word the computer picked from your choice of words!")
 difficulty = str(input("Would you like to play in 'easy', 'normal' or 'hard' mode?\nIf you want more information, input 'help': "))
@@ -127,4 +181,3 @@ elif difficulty == 'normal':
     normal()
 elif difficulty == 'hard':
     hard()
-
